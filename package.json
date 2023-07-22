@@ -1,0 +1,70 @@
+{
+  "name": "taskwizard",
+  "version": "0.1.0",
+  "description": "A versatile package containing useful code snippets for simple tasks",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build && cp -r src/types dist/",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "author": "NoBody",
+  "module": "dist/taskwizard.esm.js",
+  "bugs": {
+    "url": "https://github.com/NoBody-UU/TaskWizard/issues"
+  },
+  "homepage": "https://github.com/NoBody-UU/TaskWizard#readme",
+  "keywords": [
+    "utils",
+    "utility",
+    "times",
+    "emojis-languages"
+  ],
+  "size-limit": [
+    {
+      "path": "dist/taskwizard.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/taskwizard.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^8.2.6",
+    "husky": "^8.0.3",
+    "size-limit": "^8.2.6",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.6.0",
+    "typescript": "^3.9.10"
+  },
+  "dependencies": {
+    "@types/node-fetch": "^2.6.4",
+    "node-fetch": "^2.6.12"
+  }
+}
