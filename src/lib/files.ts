@@ -1,29 +1,17 @@
-import { lstatSync, readdirSync } from "fs";
-import { extname, join } from "path";
+import { join } from "path";
+import { readdir } from 'node:fs/promises';
 
 /**
- * Recursively search for files with specified extensions in a folder and its subfolders.
+ * Recursively search for files in a folder.
  *
- * @param {string} folderPath - The path to the folder where the search should start.
- * @param {string[]} [allowedExtensions=[".js"]] - An array of allowed file extensions to include in the search. Default: [".js"]
+ * @param {string} path - The path to the folder where the search should start.
  * @returns {string[]} - An array containing the absolute file paths of the found files.
  */
-export function searchFilesRecursive(folderPath: string, allowedExtensions: string[] = [".js"]): string[] {
-  const filePaths: string[] = [];
-  const readFilesRecursively = (directory: string) => {
-    const files = readdirSync(join(process.cwd(), directory));
-    files.forEach((file) => {
-      const stat = lstatSync(join(process.cwd(), directory, file));
-      if (stat.isDirectory()) {
-        readFilesRecursively(join(directory, file));
-      } else {
-        const extension = extname(file);
-        if (!allowedExtensions.includes(extension)) return;
-        const filePath = join(process.cwd(), directory, file);
-        filePaths.push(`${filePath}`);
-      }
-    });
-  };
-  readFilesRecursively(folderPath);
-  return filePaths;
+export async function searchFilesRecursive(path: string): Promise<string[]> {
+  const paths: string[] = [];
+  for (const file of (await readdir(path, { withFileTypes: true }))) {
+    const dir = join(path, file.name);
+    paths.push(...(file.isDirectory() ? await searchFilesRecursive(dir) : [dir]));
+  }
+  return paths
 }

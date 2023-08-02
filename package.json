@@ -1,13 +1,12 @@
 {
   "name": "taskwizard",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A versatile package containing useful code snippets for simple tasks",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "engines": {
     "node": ">=10"
