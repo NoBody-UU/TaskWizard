@@ -4,7 +4,7 @@
  * @returns Returns true if the text is a valid hexadecimal color code, otherwise returns false.
  */
 export function isHex(colorCode: string): boolean {
-  return /^#?([a-f0-9]{6}|[a-f0-9]{3})$/.test(colorCode);
+  return /^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/.test(colorCode);
 }
 
 /**

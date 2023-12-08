@@ -15,7 +15,7 @@ export async function fetchBuffer(url: string, init?: RequestInit): Promise<Fetc
     const buffer: Buffer = Buffer.from(arrayBuffer);
     if (response.status !== 200) console.debug(response);
     return {
-      success: response.status === 200 ? true : false,
+      success: response.status === 200,
       status: response.status,
       buffer,
     };
